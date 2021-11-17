@@ -1,10 +1,18 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/17 17:11:55 by syolando          #+#    #+#             */
+/*   Updated: 2021/11/17 17:11:59 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
-#include <fcntl.h>
 #include <stdlib.h>
 #include "get_next_line.h"
-
-
 
 static int	nl_index(char *str)
 {
