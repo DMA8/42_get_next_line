@@ -6,13 +6,13 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:12:09 by syolando          #+#    #+#             */
-/*   Updated: 2021/11/17 18:25:25 by syolando         ###   ########.fr       */
+/*   Updated: 2021/11/20 15:37:13 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int	ft_strlen(const char *s)
+int	strlen_mod(const char *s)
 {
 	int	len;
 
@@ -31,16 +31,19 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	ind;
 	char	*ans;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
+	len1 = strlen_mod(s1);
+	len2 = strlen_mod(s2);
 	ind = -1;
 	ans = (char *)malloc(len1 + len2 + 1);
 	if (!ans)
+	{
+		free(s1);
 		return (NULL);
-	while (++ind < len1)
+	}
+	while (++ind < len1 && s1 != NULL)
 		ans[ind] = s1[ind];
 	ind = -1;
-	while (++ind < len2)
+	while (++ind < len2 && s2 != NULL)
 		ans[ind + len1] = s2[ind];
 	ans[ind + len1] = 0;
 	free(s1);
@@ -52,7 +55,7 @@ int	check_inputs_failed(char *dest, char *buff)
 	int	to_free;
 
 	to_free = 0;
-	if (ft_strlen(dest) + ft_strlen(buff) == 0)
+	if (strlen_mod(dest) + strlen_mod(buff) == 0)
 	{	
 		free(dest);
 		to_free = 1;
@@ -62,8 +65,8 @@ int	check_inputs_failed(char *dest, char *buff)
 
 void	count_len_for_two_var(int *len1, int *len2, char *dest, char *buff)
 {
-	*len1 = ft_strlen(dest);
-	*len2 = ft_strlen(buff);
+	*len1 = strlen_mod(dest);
+	*len2 = strlen_mod(buff);
 }
 
 int	nl_index(char *str)
@@ -71,6 +74,8 @@ int	nl_index(char *str)
 	int	ind;
 
 	ind = 0;
+	if (!str || !str[0])
+		return (-1);
 	while (str[ind])
 	{
 		if (str[ind] == '\n')
